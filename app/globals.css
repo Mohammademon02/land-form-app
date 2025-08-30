@@ -24,3 +24,47 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+
+
+.dotted_bottom {
+  border: none;
+  border-bottom: 1px dotted #000;
+  background-color: #fff;
+}
+
+
+
+.input_bangla {
+  font-family: boishakhi !important;
+  font-size: 90%;
+}
+
+
+.numeric_bangla {
+  font-family: boishakhi !important;
+  font-size: 80%;
+}
+
+
+.font-14-17{
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.font-11-13{
+  font-size: 11px;
+  line-height: 13px;
+}
+
+.font-10-12{
+  font-size: 11px;
+  line-height: 13px;
+}
+
+
+.b1 {
+  border: 1px dotted;
+  padding: 2px;
+}
