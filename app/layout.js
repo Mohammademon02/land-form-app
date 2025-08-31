@@ -9,7 +9,7 @@ const kalpurush = localFont({
 });
 
 const Boishakhi = localFont({
-  src: "../public/fonts/boishakhi.ttf",
+  src: "../public/fonts/Boishakhi.ttf",
   variable: "--font-boishakhi",
   weight: "400",
   style: "normal",
