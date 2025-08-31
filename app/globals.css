@@ -19,6 +19,20 @@
   }
 }
 
+
+@font-face {
+  src: url("/fonts/Boishakhi.ttf") format("ttf");
+  font-family: 'Boishakhi';
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-boishakhi {
+  font-family: Boishakhi !important;
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -37,28 +51,33 @@ body {
 
 
 .input_bangla {
-  font-family: boishakhi !important;
+  font-family: Boishakhi !important;
   font-size: 90%;
 }
 
 
 .numeric_bangla {
-  font-family: boishakhi !important;
+  font-family: Boishakhi !important;
   font-size: 80%;
 }
 
 
-.font-14-17{
+.font-14-17 {
   font-size: 14px;
   line-height: 17px;
 }
 
-.font-11-13{
+.font-13-15 {
+  font-size: 13px;
+  line-height: 15px;
+}
+
+.font-11-13 {
   font-size: 11px;
   line-height: 13px;
 }
 
-.font-10-12{
+.font-10-12 {
   font-size: 11px;
   line-height: 13px;
 }
@@ -67,4 +86,8 @@ body {
 .b1 {
   border: 1px dotted;
   padding: 2px;
+}
+
+.table-bordered {
+  border: 1px solid #ddd;
 }
