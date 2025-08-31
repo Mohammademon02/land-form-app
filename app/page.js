@@ -11,7 +11,10 @@ export default function Home() {
         </div>
         <div className="bg-white p-2.5"></div>
       </div>
+
       <div className="w-[815px] mx-auto">
+
+        {/* ==========Address part start========= */}
         <div className="w-[7.9in] h-[11in] bg-white mt-5 mb-[30px] border border-dotted border-r-solid border-[#333333] p-2.5 rounded-[10px] text-[#333333]">
           <div className="grid grid-cols-2 text-sm leading-[15px]">
             <div>
@@ -75,6 +78,10 @@ export default function Home() {
           </table>
           <div className="h-2.5"></div>
 
+          {/* ==========Address part End========= */}
+
+
+          {/* ==========মালিকের বিবরণ Start ========= */}
           <div>
             <p className="font-bold text-xs leading-3.5 text-center m-0 p-0">
               <u>মালিকের বিবরণ</u>
@@ -116,8 +123,12 @@ export default function Home() {
               </tbody>
             </table>
           </div>
+          {/* ==========মালিকের বিবরণ End ========= */}
+
 
           <div className="w-full">
+
+            {/* ==========জমির বিবরণ Start============ */}
             <table className="w-full border border-dotted border-black mx-[2px] my-2.5 float-left text-[11px]">
               <thead>
                 <tr>
@@ -149,7 +160,10 @@ export default function Home() {
             </table>
 
             <div className="h-2.5"></div>
+            {/* ==========জমির বিবরণ End============ */}
 
+
+            {/* ===========আদায়ের বিবরণ Start=========== */}
             <table className="w-full table table-striped table-bordered table-hover mx-[2px] my-2.5" >
               <tbody>
                 <tr className="bg-[#F9F9F9] hover:bg-[#F5F5F5]">
@@ -183,7 +197,11 @@ export default function Home() {
             <div className="w-full  mx-[2px] my-2.5">
               <p className="dotted_bottom font-14-17"> সর্বমোট (কথায়): পাঁচ শত টাকা মাত্র ।</p>
             </div>
+            {/* ===========আদায়ের বিবরণ End=========== */}
 
+
+
+            {/* ===========Qr Code Start=========== */}
             <div>
 
               <div className="w-[350px] float-left">
@@ -207,6 +225,7 @@ export default function Home() {
                 <p className="text-center p-[5px]" >এই দাখিলা ইলেক্ট্রনিকভাবে তৈরি করা হয়েছে,  <br /> কোন স্বাক্ষর প্রয়োজন নেই।</p>
               </div>
             </div>
+            {/* ===========Qr Code End=========== */}
 
           </div>
 
