@@ -70,6 +70,7 @@ export default function Home() {
         </div>
       </div>
     </div>
+    // test
     // <div className="bg-[#f4ffe6] px-5 pt-[50px] pb-5 relative">
     //   <div className="bg-[#4B8DF8] border border-[#7cacfa] rounded overflow-hidden">
     //     <div className="flex items-center justify-center">
