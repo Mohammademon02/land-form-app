@@ -1,15 +1,44 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
-  output   = "../app/generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+
+model LandTaxReceipt {
+  id                        String              @id @default(auto()) @map("_id") @db.ObjectId
+  serial_number             String?
+  office_name               String?
+  mouzaJL_no                String?
+  upazila_thana             String?
+  district_name             String?
+  holding_no                String?
+  khatian_no                String?
+  net_jomir_poriman         String?
+  moreThenThreeYearBokoya   String?
+  lastThreeYearBokoya       String?
+  bokoyaJoriman             String?
+  halDabi                   String?
+  totalDabi                 String?
+  totalBokoya               String?
+  owners                    Owner[]
+  landDetails               LandDetail[]
+  createdAt                 DateTime            @default(now())
+}
+
+type Owner {
+  owner_name                String?
+  owner_share               String?
+}
+
+type LandDetail {
+  land_sl                   String?
+  dag_no                    String?
+  jomir_type                String?
+  jomir_poriman             String?
 }
