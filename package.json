@@ -6,7 +6,8 @@
     "dev": "next dev --port 3005 --turbopack",
     "build": "next build --turbopack",
     "start": "next start --port 3005",
-    "lint": "eslint"
+    "lint": "eslint",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^6.15.0",
