@@ -1,7 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/lib/db';
 import { NextResponse } from 'next/server';
 
-const prisma = new PrismaClient();
 
 // এই এপিআইটি khatian_no দিয়ে একটি বা একাধিক ডেটা পেতে GET রিকোয়েস্ট পরিচালনা করে।
 // khatian_no URL-এ একটি ডাইনামিক রুট প্যারামিটার হিসাবে পাস করা হয়।

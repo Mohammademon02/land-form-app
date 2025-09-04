@@ -1,7 +1,21 @@
+import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
-import { deleteOldData } from "@/lib/deleteOldData";
 
 export async function GET() {
-  await deleteOldData();
-  return NextResponse.json({ message: "Cleanup done ✅" });
+  
+  const tenMinutesAgo = new Date();
+  tenMinutesAgo.setMinutes(tenMinutesAgo.getMinutes() - 10);
+
+  await prisma.landTaxReceipt.deleteMany({
+    where: {
+      createdAt: {
+        lt: tenMinutesAgo,
+      },
+    },
+  });
+
+  return NextResponse.json({
+    message: "Data cleaned up successfully!",
+    status: 200,
+  });
 }
