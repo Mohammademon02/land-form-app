@@ -3,13 +3,11 @@ import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function ViewReceipt(  ) {
+export default function ViewReceipt() {
   const [receipts, setReceipts] = useState([]);
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
   const khatianNo = searchParams.get('khatianNo');
-
-  console.log(khatianNo);
 
   useEffect(() => {
     if (khatianNo) {
@@ -20,8 +18,8 @@ export default function ViewReceipt(  ) {
           // Replace with your actual API call
           const response = await fetch(`/api/land-tax-data-by-id/${khatianNo}`);
           const data = await response.json(); 
-          console.log(data.data);
-          setReceipts(data.data.receipts); // Assuming the API returns an object with a 'receipts' array
+          console.log(data);
+          setReceipts(data); // Assuming the API returns an object with a 'receipts' array
         } catch (error) {
           console.error("Failed to fetch data:", error);
           setReceipts([]);
@@ -36,6 +34,9 @@ export default function ViewReceipt(  ) {
     }
   }, [khatianNo]);
 
+  console.log("Receipts:", receipts);
+  console.log("khatianNo", khatianNo);
+
   if (loading) {
     return <div className="flex justify-center items-center min-h-screen">Loading...</div>;
   }
@@ -47,7 +48,7 @@ export default function ViewReceipt(  ) {
 
   return (
     <>
-      {receipts?.length > 0 && receipts?.map((receipt) => {
+      {receipts?.data.length > 0 && receipts?.data.map((receipt) => {
         return (
 
           <div key={receipt?._id} className="bg-[#f4ffe6] px-5 pt-[50px] pb-5 relative">

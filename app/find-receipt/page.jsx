@@ -1,14 +1,10 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-export default function FindReceipt() {
+export default function FindReceipt( ) {
     // স্টেট ভেরিয়েবল যা ইউজার ইনপুটকে ম্যানেজ করবে
     const [khatianNo, setKhatianNo] = useState('');
-
-    // রাউটার অবজেক্ট নেভিগেশন পরিচালনার জন্য
-    const router = useRouter();
 
     // সার্চ বাটন ক্লিক হলে এই ফাংশনটি কাজ করবে
     const handleSearch = () => {
@@ -18,7 +14,7 @@ export default function FindReceipt() {
         }
 
         // ফলাফলের পেজে নেভিগেট করা হচ্ছে এবং খতিয়ান নম্বরটি URL-এর প্যারামিটার হিসেবে পাঠানো হচ্ছে
-        router.push(`/view-receipt?khatianNo=${khatianNo}`);
+        window.location.href = `/view-receipt?khatianNo=${khatianNo}`;
     };
 
     // 'Enter' কী চাপলে সার্চ করার জন্য এই ফাংশনটি কাজ করবে
