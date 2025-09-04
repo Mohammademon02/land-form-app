@@ -1,6 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
+import { QRCodeCanvas } from "qrcode.react";
 import { useEffect, useState, Suspense } from "react";
 
 function ViewReceiptContent() {
@@ -52,6 +53,8 @@ function ViewReceiptContent() {
       {receipts && receipts.status === 200 ? (
         <div>
           {receipts?.data?.map((receipt, index) => {
+            // ✅ QR code link তৈরি
+            const qrUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/view-receipt?khatianNo=${receipt?.khatian_no}`;
             return (
               <div
                 key={index}
@@ -382,9 +385,17 @@ function ViewReceiptContent() {
                           </div>
                         </div>
 
-                        <div className="w-[90px] float-left">
-                          <div className="qrcode-print"></div>
+                        <div className="w-[90px] float-left flex justify-center items-center">
+                          {/* ✅ QR Code render */}
+                          <QRCodeCanvas
+                            value={qrUrl}
+                            size={74}
+                            includeMargin={true}
+                            bgColor={"#ffffff"}
+                            fgColor={"#000000"}
+                          />
                         </div>
+
                         <div className="w-[265px] float-right text-right text-xs">
                           <p className="text-center p-[5px]">
                             এই দাখিলা ইলেক্ট্রনিকভাবে তৈরি করা হয়েছে, <br />{" "}
