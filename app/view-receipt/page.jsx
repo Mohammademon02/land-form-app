@@ -1,32 +1,48 @@
 'use client'
 import { cn } from "@/lib/utils";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function Home() {
+export default function ViewReceipt(  ) {
   const [receipts, setReceipts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const searchParams = useSearchParams();
+  const khatianNo = searchParams.get('khatianNo');
 
-  // API থেকে সব রসিদ Fetch করা
+  console.log(khatianNo);
+
   useEffect(() => {
-    async function fetchReceipts() {
-      setLoading(true);
-      try {
-        const response = await fetch("/api/land-tax-data");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+    if (khatianNo) {
+      // Simulate fetching data from an API
+      const fetchData = async () => {
+        setLoading(true);
+        try {
+          // Replace with your actual API call
+          const response = await fetch(`/api/land-tax-data-by-id/${khatianNo}`);
+          const data = await response.json(); 
+          console.log(data.data);
+          setReceipts(data.data.receipts); // Assuming the API returns an object with a 'receipts' array
+        } catch (error) {
+          console.error("Failed to fetch data:", error);
+          setReceipts([]);
+        } finally {
+          setLoading(false);
         }
-        const data = await response.json();
-        setReceipts(data.data);
-      } catch (error) {
-        console.error("Failed to fetch receipts:", error);
-      } finally {
-        setLoading(false);
-      }
+      };
+      fetchData();
+    } else {
+      setLoading(false);
+      setReceipts([]);
     }
-    fetchReceipts();
-  }, []);
+  }, [khatianNo]);
 
-  console.log("Receipts:", receipts);
+  if (loading) {
+    return <div className="flex justify-center items-center min-h-screen">Loading...</div>;
+  }
+  if (receipts?.length === 0) {
+    return <div className="flex justify-center items-center min-h-screen">No receipts found for khatian number: {khatianNo}.</div>;
+  }
+  
 
 
   return (
