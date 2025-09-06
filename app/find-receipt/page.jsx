@@ -23,7 +23,7 @@ export default function FindReceipt() {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen p-4 bg-gray-100 font-sans">
+        <div className="flex items-center justify-center min-h-screen p-4 bg-[#F4FFE6] font-sans">
             <div className="container bg-white rounded-2xl p-8 space-y-4 w-full max-w-4xl shadow-2xl">
                 <div className="flex justify-center items-center bg-white">
                     <Image src="/images/logo2.jpg" width={200} height={50} alt="logo" />
