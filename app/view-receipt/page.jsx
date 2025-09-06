@@ -10,7 +10,7 @@ function ViewReceiptContent() {
   const [receipts, setReceipts] = useState([]);
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
-  
+
   // 🔑 Get encoded value
   const encoded = searchParams.get("k");
 
@@ -105,19 +105,20 @@ function ViewReceiptContent() {
             return (
               <div
                 key={index}
-                className="bg-[#f4ffe6] px-5 pt-[50px] pb-5 relative printContent"
+                className="bg-[#f4ffe6] md:pt-[50px] pb-5 relative printContent"
               >
-                <div className="w-full min-w-[500px] bg-[#4B8DF8] border border-[#7cacfa] rounded overflow-hidden hide-on-print">
-                  <div className="flex items-center justify-center">
-                    <button onClick={handlePrint}
-                      className="text-[13px] leading-4 text-white py-1 px-2.5 mb-5 rounded border-r-2 border-b-2 border-r-[#333333] border-b-[#333333] cursor-pointer">
-                      প্রিন্ট
-                    </button>
+                <div className="md:px-5">
+                  <div className="w-full min-w-[500px] bg-[#4B8DF8] border border-[#7cacfa] rounded overflow-hidden hide-on-print">
+                    <div className="flex items-center justify-center">
+                      <button onClick={handlePrint}
+                        className="text-[13px] leading-4 text-white py-1 px-2.5 mb-5 rounded border-r-2 border-b-2 border-r-[#333333] border-b-[#333333] cursor-pointer">
+                        প্রিন্ট
+                      </button>
+                    </div>
+                    <div className="bg-white p-2.5"></div>
                   </div>
-                  <div className="bg-white p-2.5"></div>
                 </div>
-
-                <div className="w-[815px] mx-auto ">
+                <div className=" px-5 w-[815px] mx-auto ">
                   {/* ==========Address part start========= */}
                   <div className="printContent__wrapper w-[7.9in] h-[11in] bg-white mt-5 mb-[30px] border border-dotted border-r-solid border-[#333333] p-2.5 rounded-[10px] text-[#333333]">
                     <div className="grid grid-cols-2 text-sm leading-[15px]">
