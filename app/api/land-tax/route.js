@@ -15,6 +15,8 @@ export async function POST(request) {
     // For MongoDB, you should pass the arrays directly, not wrapped in a `create` object.
     const newReceipt = await prisma.landTaxReceipt.create({
       data: {
+        form_no: formData.form_no || "",
+        porishisht_no: formData.porishisht_no || "",
         serial_number: formData.serial_number || "",
         office_name: formData.office_name || "",
         mouzaJL_no: formData.mouzaJL_no || "",
@@ -29,6 +31,11 @@ export async function POST(request) {
         halDabi: formData.halDabi || "",
         totalDabi: formData.totalDabi || "",
         totalBokoya: formData.totalBokoya || "",
+        netTotal: formData.netTotal || "",
+        last_tax_payment_year: formData.last_tax_payment_year || "",
+        chalan_no: formData.chalan_no || "",
+        bangla_date: formData.bangla_date || "",
+        eglish_date: formData.eglish_date || "",
         owners: owners.map(owner => ({
             owner_name: owner.owner_name || "",
             owner_share: owner.owner_share || "",

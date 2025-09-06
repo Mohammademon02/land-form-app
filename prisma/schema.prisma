@@ -12,6 +12,8 @@ datasource db {
 
 model LandTaxReceipt {
   id                        String              @id @default(auto()) @map("_id") @db.ObjectId
+  form_no                   String?
+  porishisht_no             String?
   serial_number             String?
   office_name               String?
   mouzaJL_no                String?
@@ -26,6 +28,11 @@ model LandTaxReceipt {
   halDabi                   String?
   totalDabi                 String?
   totalBokoya               String?
+  netTotal                  String?
+  last_tax_payment_year     String?
+  chalan_no                 String?
+  bangla_date               String?
+  eglish_date               String?
   owners                    Owner[]
   landDetails               LandDetail[]
   createdAt                 DateTime            @default(now())

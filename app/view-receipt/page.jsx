@@ -1,5 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { QRCodeCanvas } from "qrcode.react";
 import { useEffect, useState, Suspense } from "react";
@@ -35,7 +36,6 @@ function ViewReceiptContent() {
   }, [khatianNo]);
 
   console.log("Receipts:", receipts);
-  console.log("khatianNo", khatianNo);
 
   if (loading) {
     return (
@@ -43,7 +43,13 @@ function ViewReceiptContent() {
         key={khatianNo}
         className="flex justify-center items-center min-h-screen bg-white text-[#333333]"
       >
-        <div className="loader"></div>
+        <Image
+          src="/images/loading_img.webp"
+          width={60}
+          height={60}
+          alt="logo"
+          className="animate-spin"
+        />
       </div>
     );
   }
@@ -74,8 +80,8 @@ function ViewReceiptContent() {
                   <div className="w-[7.9in] h-[11in] bg-white mt-5 mb-[30px] border border-dotted border-r-solid border-[#333333] p-2.5 rounded-[10px] text-[#333333]">
                     <div className="grid grid-cols-2 text-sm leading-[15px]">
                       <div>
-                        <span className="block text-left font-14-17">
-                          বাংলাদেশ ফরম নং ১০৭৭
+                        <span className="block text-left font-14-17 font-b">
+                          বাংলাদেশ ফরম নং {receipt.form_no}
                         </span>
                         <span className="block text-left font-14-17">
                           {" "}
@@ -84,7 +90,7 @@ function ViewReceiptContent() {
                       </div>
                       <div>
                         <span className="block text-right font-14-17">
-                          (পরিশিষ্ট: ৩৮)
+                          (পরিশিষ্ট: {receipt.porishisht_no})
                         </span>
                         <span className="block text-right font-boishakhi font-13-15">
                           ক্রমিক নং {`${receipt.serial_number}`}
@@ -177,8 +183,7 @@ function ViewReceiptContent() {
                             key={i}
                             className={cn(
                               "border border-dotted border-black my-2.5 text-[11px]",
-                              receipt?.owners?.length - 1 === i &&
-                                (i + 1) % 2 !== 0
+                              receipt?.owners?.length === 1
                                 ? "w-[100%]"
                                 : "w-[49%]"
                             )}
@@ -227,7 +232,6 @@ function ViewReceiptContent() {
 
                       {receipt?.landDetails?.length > 0 && (
                         <>
-                          <span>{receipt?.landDetails?.length}</span>
                           <div className="w-full flex flex-wrap gap-x-[14px] mx-[2px]">
                             {receipt?.landDetails?.map((land, index) => {
                               return (
@@ -235,8 +239,7 @@ function ViewReceiptContent() {
                                   key={index}
                                   className={cn(
                                     "border border-dotted border-black my-2.5 text-[11px]",
-                                    receipt?.landDetails?.length - 1 ===
-                                      index && (index + 1) % 2 !== 0
+                                    receipt?.landDetails?.length === 1
                                       ? "w-[100%]"
                                       : "w-[49%]"
                                   )}
@@ -271,6 +274,7 @@ function ViewReceiptContent() {
                               );
                             })}
                           </div>
+                          
                           <table className="w-full border border-dotted border-black mx-[2px] my-2.5 text-[12px]">
                             <tbody>
                               <tr>
@@ -357,7 +361,7 @@ function ViewReceiptContent() {
 
                       <div className="w-full  mx-[2px] my-2.5">
                         <p className="dotted_bottom font-14-17">
-                          সর্বমোট (কথায়): পাঁচ শত টাকা মাত্র ।
+                          সর্বমোট (কথায়): {receipt?.netTotal} ।
                         </p>
                       </div>
                       {/* ===========আদায়ের বিবরণ End=========== */}
@@ -366,21 +370,21 @@ function ViewReceiptContent() {
                       <div>
                         <div className="w-[350px] float-left">
                           <p className="m-0 font-14-17">
-                            নোট: সর্বশেষ কর পরিশোধের সাল - 2024-2025 (অর্থবছর)
+                            নোট: সর্বশেষ কর পরিশোধের সাল - {receipt?.last_tax_payment_year} (অর্থবছর)
                           </p>
-                          <p className="input_bangla font-13-15 mb-4">
+                          <p className="input_bangla font-13-15 mb-2">
                             {" "}
-                            চালান নং : 2324-0037088472
+                            চালান নং : {receipt?.chalan_no}
                           </p>
 
                           <p> তারিখ : </p>
 
-                          <div className="mt-[-37px] ml-2.5 font-14-17">
-                            <p className="w-[115px] p-0 m-0 ml-[38px] mb-[2px] font-14-17">
-                              ১৯ বৈশাখ ১৪৩১
+                          <div className="mt-[-28px] ml-2.5 font-14-17">
+                            <p className="w-[115px] p-0 m-0 ml-[41px] mb-[2px] font-14-17">
+                              {receipt?.bangla_date}
                             </p>
-                            <span className="border-t ml-[36px] font-14-17">
-                              ০২ মে, ২০২৪
+                            <span className="border-t ml-[41px] font-14-17">
+                              {receipt?.eglish_date}
                             </span>
                           </div>
                         </div>

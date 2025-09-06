@@ -26,8 +26,21 @@
   font-style: normal;
 }
 
+@font-face {
+  src: url("/fonts/kalpurush.ttf") format("ttf");
+    font-family: 'Kalpurush';
+      font-weight: normal;
+      font-style: normal;
+}
+
 .font-boishakhi {
   font-family: Boishakhi !important;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-kalpurush {
+  font-family: Kalpurush !important;
   font-weight: normal;
   font-style: normal;
 }

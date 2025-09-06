@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { useState, memo } from "react";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
@@ -13,7 +14,7 @@ const InputField = memo(({ name, label, type, error, ...rest }) => (
       id={name}
       name={name}
       type={type}
-      className="border text-[#333333] border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-[#006145] focus:ring-1 focus:ring-[#006145]"
+      className="border text-[#333333] border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-[#006145] focus:ring-1 focus:ring-[#006145] font-boishakhi"
       {...rest}
     />
     {error && <p className="mt-1 text-sm text-red-500">{error.message}</p>}
@@ -27,7 +28,7 @@ const SuccessModal = ({ message, onClose }) => (
   <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center p-4 z-50">
     <div className="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full text-center">
       <h3 className="text-2xl font-semibold text-green-600 mb-4">সফল!</h3>
-      <p className="mb-4">{message}</p>
+      <p className="mb-4 text-[#333333]">{message}</p>
       <div className="flex justify-center space-x-4">
         <Link
           href="/find-receipt"
@@ -37,7 +38,7 @@ const SuccessModal = ({ message, onClose }) => (
         </Link>
         <button
           onClick={onClose}
-          className="bg-gray-200 text-gray-800 font-semibold px-6 py-2 rounded-lg hover:bg-gray-300 transition duration-200"
+          className="bg-gray-200 text-gray-800 font-semibold px-6 py-2 rounded-lg hover:bg-gray-300 transition duration-200 cursor-pointer"
         >
           বন্ধ করুন
         </button>
@@ -60,6 +61,8 @@ export default function App() {
     reset,
   } = useForm({
     defaultValues: {
+      form_no: "",
+      porishisht_no: "",
       serial_number: "",
       office_name: "",
       mouzaJL_no: "",
@@ -74,6 +77,11 @@ export default function App() {
       halDabi: "",
       totalDabi: "",
       totalBokoya: "",
+      netTotal: "",
+      last_tax_payment_year: "",
+      chalan_no: "",
+      bangla_date: "",
+      eglish_date: "",
       owners: [{ owner_name: "", owner_share: "" }],
       landDetails: [
         { land_sl: "", dag_no: "", jomir_type: "", jomir_poriman: "" },
@@ -142,8 +150,8 @@ export default function App() {
   return (
     <div className="bg-white min-h-screen">
       <div className="container mx-auto px-4 py-8">
-        <h2 className="text-3xl font-bold text-center mb-6 text-[#006145]">
-          ভূমি উন্নয়ন কর পরিশোধ রসিদ
+        <h2 className="text-3xl font-bold text-center mb-6 text-[#006145] flex justify-center">
+          <Image src="/images/logo2.jpg" width={200} height={50} alt="logo" />
         </h2>
 
         <form onSubmit={handleSubmit(onSubmit)} className="">
@@ -152,6 +160,32 @@ export default function App() {
             📌 সাধারণ তথ্য
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 py-5">
+            <Controller
+              name="form_no"
+              control={control}
+              rules={{ required: "বাংলাদেশ ফরম নং আবশ্যক" }}
+              render={({ field }) => (
+                <InputField
+                  {...field}
+                  label="বাংলাদেশ ফরম নং"
+                  type="number"
+                  error={errors.form_no}
+                />
+              )}
+            />
+            <Controller
+              name="porishisht_no"
+              control={control}
+              rules={{ required: "পরিশিষ্ট আবশ্যক" }}
+              render={({ field }) => (
+                <InputField
+                  {...field}
+                  label="পরিশিষ্ট"
+                  type="number"
+                  error={errors.porishisht_no}
+                />
+              )}
+            />
             <Controller
               name="serial_number"
               control={control}
@@ -168,7 +202,7 @@ export default function App() {
             <Controller
               name="office_name"
               control={control}
-              rules={{ required: "অফিসের নাম আবশ্যক" }}
+              rules={{ required: "সিটি কর্পোরেশন/ পৌর/ ইউনিয়ন ভূমি অফিসের নাম আবশ্যক" }}
               render={({ field }) => (
                 <InputField
                   {...field}
@@ -517,15 +551,80 @@ export default function App() {
                 />
               )}
             />
+            <Controller
+              name="netTotal"
+              control={control}
+              rules={{ required: "সর্বমোট (কথায়): আবশ্যক" }}
+              render={({ field }) => (
+                <InputField
+                  {...field}
+                  type="text"
+                  label="সর্বমোট (কথায়):"
+                  error={errors.netTotal}
+                />
+              )}
+            />
+            <Controller
+              name="last_tax_payment_year"
+              control={control}
+              rules={{ required: "সর্বশেষ কর পরিশোধের সাল আবশ্যক" }}
+              render={({ field }) => (
+                <InputField
+                  {...field}
+                  type="text"
+                  label="সর্বশেষ কর পরিশোধের সাল"
+                  className="border text-[#333333] border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-[#006145] focus:ring-1 focus:ring-[#006145] font-kalpurush"
+                  error={errors.last_tax_payment_year}
+                />
+              )}
+            />
+            <Controller
+              name="chalan_no"
+              control={control}
+              rules={{ required: "চালান নং আবশ্যক" }}
+              render={({ field }) => (
+                <InputField
+                  {...field}
+                  type="text"
+                  label="চালান নং"
+                  error={errors.chalan_no}
+                />
+              )}
+            />
+            <Controller
+              name="bangla_date"
+              control={control}
+              rules={{ required: "বাংলা তারিখ আবশ্যক" }}
+              render={({ field }) => (
+                <InputField
+                  {...field}
+                  type="text"
+                  label="বাংলা তারিখ"
+                  error={errors.bangla_date}
+                />
+              )}
+            />
+            <Controller
+              name="eglish_date"
+              control={control}
+              rules={{ required: "ইংরেজি তারিখ আবশ্যক" }}
+              render={({ field }) => (
+                <InputField
+                  {...field}
+                  type="text"
+                  label="ইংরেজি তারিখ"
+                  error={errors.eglish_date}
+                />
+              )}
+            />
           </div>
           {/* Status and loading indicators */}
           {statusMessage && (
             <div
-              className={`col-span-2 p-4 rounded-lg text-center font-medium ${
-                statusMessage.includes("সফলভাবে")
+              className={`col-span-2 p-4 rounded-lg text-center font-medium ${statusMessage.includes("সফলভাবে")
                   ? "bg-green-100 text-green-700"
                   : "bg-red-100 text-red-700"
-              }`}
+                }`}
             >
               {statusMessage}
             </div>
