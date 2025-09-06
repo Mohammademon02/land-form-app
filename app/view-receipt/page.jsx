@@ -46,6 +46,16 @@ function ViewReceiptContent() {
     window.print();
   };
 
+  useEffect(() => {
+    // disable right click
+    const handleContextMenu = (e) => e.preventDefault();
+    document.addEventListener("contextmenu", handleContextMenu);
+
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+    };
+  }, []);
+
   if (loading) {
     return (
       <div
@@ -75,7 +85,7 @@ function ViewReceiptContent() {
                 key={index}
                 className="bg-[#f4ffe6] px-5 pt-[50px] pb-5 relative printContent"
               >
-                <div className="bg-[#4B8DF8] border border-[#7cacfa] rounded overflow-hidden hide-on-print">
+                <div className="w-full min-w-[500px] bg-[#4B8DF8] border border-[#7cacfa] rounded overflow-hidden hide-on-print">
                   <div className="flex items-center justify-center">
                     <button onClick={handlePrint}
                       className="text-[13px] leading-4 text-white py-1 px-2.5 mb-5 rounded border-r-2 border-b-2 border-r-[#333333] border-b-[#333333] cursor-pointer">
