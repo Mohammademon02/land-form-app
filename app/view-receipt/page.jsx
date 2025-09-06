@@ -5,11 +5,17 @@ import { useSearchParams } from "next/navigation";
 import { QRCodeCanvas } from "qrcode.react";
 import { useEffect, useState, Suspense } from "react";
 
+
 function ViewReceiptContent() {
   const [receipts, setReceipts] = useState([]);
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
-  const khatianNo = searchParams.get("khatianNo");
+  
+  // 🔑 Get encoded value
+  const encoded = searchParams.get("k");
+
+  // 🔑 Decode Base64
+  const khatianNo = encoded ? atob(encoded) : "";
 
   useEffect(() => {
     if (khatianNo) {
@@ -35,7 +41,10 @@ function ViewReceiptContent() {
     }
   }, [khatianNo]);
 
-  console.log("Receipts:", receipts);
+  // Handle the print action
+  const handlePrint = () => {
+    window.print();
+  };
 
   if (loading) {
     return (
@@ -45,8 +54,8 @@ function ViewReceiptContent() {
       >
         <Image
           src="/images/loading_img.webp"
-          width={60}
-          height={60}
+          width={55}
+          height={55}
           alt="logo"
           className="animate-spin"
         />
@@ -59,25 +68,26 @@ function ViewReceiptContent() {
       {receipts && receipts.status === 200 ? (
         <div>
           {receipts?.data?.map((receipt, index) => {
-            // ✅ QR code link তৈরি
-            const qrUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/view-receipt?khatianNo=${receipt?.khatian_no}`;
+            const qrEncoded = btoa(receipt?.khatian_no);
+            const qrUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/view-receipt?k=${qrEncoded}`;
             return (
               <div
                 key={index}
-                className="bg-[#f4ffe6] px-5 pt-[50px] pb-5 relative"
+                className="bg-[#f4ffe6] px-5 pt-[50px] pb-5 relative printContent"
               >
-                <div className="bg-[#4B8DF8] border border-[#7cacfa] rounded overflow-hidden">
+                <div className="bg-[#4B8DF8] border border-[#7cacfa] rounded overflow-hidden hide-on-print">
                   <div className="flex items-center justify-center">
-                    <button className="text-[13px] leading-4 text-white py-1 px-2.5 mb-5 rounded border-r-2 border-b-2 border-r-[#333333] border-b-[#333333]">
+                    <button onClick={handlePrint}
+                      className="text-[13px] leading-4 text-white py-1 px-2.5 mb-5 rounded border-r-2 border-b-2 border-r-[#333333] border-b-[#333333] cursor-pointer">
                       প্রিন্ট
                     </button>
                   </div>
                   <div className="bg-white p-2.5"></div>
                 </div>
 
-                <div className="w-[815px] mx-auto">
+                <div className="w-[815px] mx-auto ">
                   {/* ==========Address part start========= */}
-                  <div className="w-[7.9in] h-[11in] bg-white mt-5 mb-[30px] border border-dotted border-r-solid border-[#333333] p-2.5 rounded-[10px] text-[#333333]">
+                  <div className="printContent__wrapper w-[7.9in] h-[11in] bg-white mt-5 mb-[30px] border border-dotted border-r-solid border-[#333333] p-2.5 rounded-[10px] text-[#333333]">
                     <div className="grid grid-cols-2 text-sm leading-[15px]">
                       <div>
                         <span className="block text-left font-14-17 font-b">
@@ -274,7 +284,7 @@ function ViewReceiptContent() {
                               );
                             })}
                           </div>
-                          
+
                           <table className="w-full border border-dotted border-black mx-[2px] my-2.5 text-[12px]">
                             <tbody>
                               <tr>
@@ -333,25 +343,25 @@ function ViewReceiptContent() {
                           </tr>
 
                           <tr className="bg-[#F9F9F9] hover:bg-[#F5F5F5]">
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
+                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
                               {receipt?.moreThenThreeYearBokoya}
                             </td>
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
+                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
                               {receipt?.lastThreeYearBokoya}
                             </td>
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
+                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
                               {receipt?.bokoyaJoriman}
                             </td>
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
+                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
                               {receipt?.halDabi}
                             </td>
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
+                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
                               {receipt?.totalDabi}
                             </td>
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
+                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
                               {receipt?.totalBokoya}
                             </td>
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
+                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
                               ০
                             </td>
                             <td className="text-center text-sm leading-5 p-2 border border-[#ddd]"></td>
@@ -411,6 +421,7 @@ function ViewReceiptContent() {
                     </div>
                   </div>
                 </div>
+
               </div>
             );
           })}
@@ -427,8 +438,16 @@ function ViewReceiptContent() {
 // Loading component for Suspense fallback
 function LoadingFallback() {
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="animate-pulse">Loading search parameters...</div>
+    <div
+      className="flex justify-center items-center min-h-screen bg-white text-[#333333]"
+    >
+      <Image
+        src="/images/loading_img.webp"
+        width={55}
+        height={55}
+        alt="logo"
+        className="animate-spin"
+      />
     </div>
   );
 }
