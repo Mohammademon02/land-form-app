@@ -46,37 +46,37 @@ function ViewReceiptContent() {
     window.print();
   };
 
-  useEffect(() => {
-    // Disable right-click
-    const handleContextMenu = (e) => e.preventDefault();
-    document.addEventListener("contextmenu", handleContextMenu);
+  // useEffect(() => {
+  //   // Disable right-click
+  //   const handleContextMenu = (e) => e.preventDefault();
+  //   document.addEventListener("contextmenu", handleContextMenu);
 
-    // Disable pinch zoom
-    const blockZoom = (e) => {
-      if (e.touches?.length > 1) e.preventDefault();
-    };
-    const blockGesture = (e) => e.preventDefault();
+  //   // Disable pinch zoom
+  //   const blockZoom = (e) => {
+  //     if (e.touches?.length > 1) e.preventDefault();
+  //   };
+  //   const blockGesture = (e) => e.preventDefault();
 
-    document.addEventListener("touchstart", blockZoom, { passive: false });
-    document.addEventListener("gesturestart", blockGesture, { passive: false });
+  //   document.addEventListener("touchstart", blockZoom, { passive: false });
+  //   document.addEventListener("gesturestart", blockGesture, { passive: false });
 
-    // Disable Ctrl + / - / 0 zoom shortcuts
-    const handleKeyDown = (e) => {
-      if (
-        (e.ctrlKey && (e.key === "+" || e.key === "-" || e.key === "0"))
-      ) {
-        e.preventDefault();
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
+  //   // Disable Ctrl + / - / 0 zoom shortcuts
+  //   const handleKeyDown = (e) => {
+  //     if (
+  //       (e.ctrlKey && (e.key === "+" || e.key === "-" || e.key === "0"))
+  //     ) {
+  //       e.preventDefault();
+  //     }
+  //   };
+  //   document.addEventListener("keydown", handleKeyDown);
 
-    return () => {
-      document.removeEventListener("contextmenu", handleContextMenu);
-      document.removeEventListener("touchstart", blockZoom);
-      document.removeEventListener("gesturestart", blockGesture);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener("contextmenu", handleContextMenu);
+  //     document.removeEventListener("touchstart", blockZoom);
+  //     document.removeEventListener("gesturestart", blockGesture);
+  //     document.removeEventListener("keydown", handleKeyDown);
+  //   };
+  // }, []);
 
   if (loading) {
     return (
@@ -124,7 +124,7 @@ function ViewReceiptContent() {
                     <div className="grid grid-cols-2 text-sm leading-[15px]">
                       <div>
                         <span className="block text-left font-14-17 font-b">
-                          বাংলাদেশ ফরম নং {receipt.form_no}
+                          বাংলাদেশ ফরম নং <span dangerouslySetInnerHTML={{ __html: receipt.form_no }}></span>
                         </span>
                         <span className="block text-left font-14-17">
                           {" "}
