@@ -15,16 +15,16 @@ function ViewReceiptContent() {
   const encoded = searchParams.get("k");
 
   // 🔑 Decode Base64
-  const khatianNo = encoded ? atob(encoded) : "";
+  const seterialNumber = encoded ? atob(encoded) : "";
 
   useEffect(() => {
-    if (khatianNo) {
+    if (seterialNumber) {
       // Simulate fetching data from an API
       const fetchData = async () => {
         setLoading(true);
         try {
           // Replace with your actual API call
-          const response = await fetch(`/api/land-tax-data-by-id/${khatianNo}`);
+          const response = await fetch(`/api/land-tax-data-by-id/${seterialNumber}`);
           const data = await response.json();
           setReceipts(data); // Assuming the API returns an object with a 'receipts' array
         } catch (error) {
@@ -39,11 +39,28 @@ function ViewReceiptContent() {
       setLoading(false);
       setReceipts([]);
     }
-  }, [khatianNo]);
+  }, [seterialNumber]);
 
   // Handle the print action
   const handlePrint = () => {
     window.print();
+  };
+
+
+  // Define the conversion function within your component file
+  const convertToBengali = (number) => {
+    if (number === null || number === undefined) return '';
+
+    const bengaliDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+    return String(number)
+      .split('')
+      .map(digit => {
+        if (digit >= '0' && digit <= '9') {
+          return bengaliDigits[digit];
+        }
+        return digit;
+      })
+      .join('');
   };
 
   // useEffect(() => {
@@ -81,7 +98,7 @@ function ViewReceiptContent() {
   if (loading) {
     return (
       <div
-        key={khatianNo}
+        key={seterialNumber}
         className="flex justify-center items-center min-h-screen bg-white text-[#333333]"
       >
         <Image
@@ -100,7 +117,7 @@ function ViewReceiptContent() {
       {receipts && receipts.status === 200 ? (
         <div>
           {receipts?.data?.map((receipt, index) => {
-            const qrEncoded = btoa(receipt?.khatian_no);
+            const qrEncoded = btoa(receipt?.serial_number);
             const qrUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/view-receipt?k=${qrEncoded}`;
             return (
               <div
@@ -124,7 +141,7 @@ function ViewReceiptContent() {
                     <div className="grid grid-cols-2 text-sm leading-[15px]">
                       <div>
                         <span className="block text-left font-14-17 font-b">
-                          বাংলাদেশ ফরম নং <span dangerouslySetInnerHTML={{ __html: receipt.form_no }}></span>
+                          বাংলাদেশ ফরম নং {convertToBengali(receipt.form_no)}
                         </span>
                         <span className="block text-left font-14-17">
                           {" "}
@@ -133,7 +150,7 @@ function ViewReceiptContent() {
                       </div>
                       <div>
                         <span className="block text-right font-14-17">
-                          (পরিশিষ্ট: {receipt.porishisht_no})
+                          (পরিশিষ্ট: {convertToBengali(receipt.porishisht_no)})
                         </span>
                         <span className="block text-right font-boishakhi font-13-15">
                           ক্রমিক নং {`${receipt.serial_number}`}
@@ -377,22 +394,22 @@ function ViewReceiptContent() {
 
                           <tr className="bg-[#F9F9F9] hover:bg-[#F5F5F5]">
                             <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
-                              {receipt?.moreThenThreeYearBokoya}
+                              {convertToBengali(receipt?.moreThenThreeYearBokoya)}
                             </td>
                             <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
-                              {receipt?.lastThreeYearBokoya}
+                              {convertToBengali(receipt?.lastThreeYearBokoya)}
                             </td>
                             <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
-                              {receipt?.bokoyaJoriman}
+                              {convertToBengali(receipt?.bokoyaJoriman)}
                             </td>
                             <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
-                              {receipt?.halDabi}
+                              {convertToBengali(receipt?.halDabi)}
                             </td>
                             <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
-                              {receipt?.totalDabi}
+                              {convertToBengali(receipt?.totalDabi)}
                             </td>
                             <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
-                              {receipt?.totalBokoya}
+                              {convertToBengali(receipt?.totalBokoya)}
                             </td>
                             <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
                               ০

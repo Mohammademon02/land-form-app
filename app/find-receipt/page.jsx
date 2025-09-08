@@ -4,14 +4,14 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 export default function FindReceipt() {
-    const [khatianNo, setKhatianNo] = useState('');
+    const [serialNumber, setSerialNumber] = useState('');
 
     const handleSearch = () => {
-        if (!khatianNo) {
+        if (!serialNumber) {
             return;
         }
-        // Encode khatianNo using Base64
-        const encoded = btoa(khatianNo);
+        // Encode serialNumber using Base64
+        const encoded = btoa(serialNumber);
         
         window.location.href = `/view-receipt?k=${encoded}`;
     };
@@ -34,12 +34,12 @@ export default function FindReceipt() {
                 <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
                     <input
                         type="text"
-                        id="khatianNoInput"
-                        placeholder="খতিয়ান নম্বর লিখুন"
-                        value={khatianNo}
-                        onChange={(e) => setKhatianNo(e.target.value)}
+                        id="serialNumberInput"
+                        placeholder="ক্রমিক নং লিখুন"
+                        value={serialNumber}
+                        onChange={(e) => setSerialNumber(e.target.value)}
                         onKeyPress={handleKeyPress}
-                        className="flex-grow w-full md:w-auto border text-[#333333] border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-[#006145] focus:ring-1 focus:ring-[#006145] font-boishakhi"
+                        className="flex-grow w-full md:w-auto border text-[#333333] border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-[#006145] focus:ring-1 focus:ring-[#006145]"
                     />
                     <button
                         id="searchButton"

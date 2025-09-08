@@ -14,7 +14,7 @@ const InputField = memo(({ name, label, type, error, ...rest }) => (
       id={name}
       name={name}
       type={type}
-      className="border text-[#333333] border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-[#006145] focus:ring-1 focus:ring-[#006145] font-boishakhi"
+      className="border text-[#333333] border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-[#006145] focus:ring-1 focus:ring-[#006145]"
       {...rest}
     />
     {error && <p className="mt-1 text-sm text-red-500">{error.message}</p>}

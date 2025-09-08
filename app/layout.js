@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${kalpurush.className} antialiased bg-white font-kalpurush`}
+        className={`${kalpurush.className} antialiased bg-white`}
       >
         {children}
       </body>

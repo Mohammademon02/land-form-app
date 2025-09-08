@@ -33,6 +33,19 @@
   font-style: normal;
 }
 
+@font-face {
+  src: url("/fonts/SolaimanLipi.ttf") format("ttf");
+  font-family: 'SolaimanLipi';
+    font-weight: normal;
+    font-style: normal;
+}
+
+.font-solaimanLipi {
+  font-family: SolaimanLipi !important;
+  font-weight: normal;
+  font-style: normal;
+}
+
 .font-boishakhi {
   font-family: Boishakhi !important;
   font-weight: normal;
