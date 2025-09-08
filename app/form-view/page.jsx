@@ -5,7 +5,7 @@ import { useState, memo } from "react";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 
 // Reusable Input Component, optimized with memo()
-const InputField = memo(({ name, label, type, error, ...rest }) => (
+const InputField = memo(({ name, label, type, placeholder, error, ...rest }) => (
   <div className="w-full flex flex-col">
     <label htmlFor={name} className="mb-1 font-semibold text-[#333333]">
       {label}
@@ -14,6 +14,7 @@ const InputField = memo(({ name, label, type, error, ...rest }) => (
       id={name}
       name={name}
       type={type}
+      placeholder={placeholder}
       className="border text-[#333333] border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-[#006145] focus:ring-1 focus:ring-[#006145]"
       {...rest}
     />
@@ -560,6 +561,7 @@ export default function App() {
                   {...field}
                   type="text"
                   label="সর্বমোট (কথায়):"
+                  placeholder="পাঁচ শত টাকা মাত্র"
                   error={errors.netTotal}
                 />
               )}
@@ -573,6 +575,7 @@ export default function App() {
                   {...field}
                   type="text"
                   label="সর্বশেষ কর পরিশোধের সাল"
+                  placeholder="2024-2025"
                   className="border text-[#333333] border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-[#006145] focus:ring-1 focus:ring-[#006145] font-kalpurush"
                   error={errors.last_tax_payment_year}
                 />
@@ -600,6 +603,7 @@ export default function App() {
                   {...field}
                   type="text"
                   label="বাংলা তারিখ"
+                  placeholder="১৯ বৈশাখ ১৪৩১"
                   error={errors.bangla_date}
                 />
               )}
@@ -613,6 +617,7 @@ export default function App() {
                   {...field}
                   type="text"
                   label="ইংরেজি তারিখ"
+                  placeholder="০২ মে, ২০২৪"
                   error={errors.eglish_date}
                 />
               )}

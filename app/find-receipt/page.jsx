@@ -29,7 +29,7 @@ export default function FindReceipt() {
                     <Image src="/images/logo2.jpg" width={200} height={50} alt="logo" />
                 </div>
                 <h1 className="text-3xl font-bold text-gray-900 text-center">ভূমি করের রসিদ খুঁজুন</h1>
-                <p className="text-gray-500 text-center">খতিয়ান নম্বর দিয়ে আপনার ভূমি করের রসিদটি খুঁজুন।</p>
+                <p className="text-gray-500 text-center">ক্রমিক নং দিয়ে আপনার ভূমি করের রসিদটি খুঁজুন।</p>
 
                 <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
                     <input
