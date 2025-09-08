@@ -12,22 +12,22 @@ datasource db {
 
 model LandTaxReceipt {
   id                        String              @id @default(auto()) @map("_id") @db.ObjectId
-  form_no                   Float?
-  porishisht_no             Float?
-  serial_number             Float?
+  form_no                   String?
+  porishisht_no             String?
+  serial_number             String?
   office_name               String?
   mouzaJL_no                String?
   upazila_thana             String?
   district_name             String?
   holding_no                String?
   khatian_no                String?
-  net_jomir_poriman         Float?
-  moreThenThreeYearBokoya   Float?
-  lastThreeYearBokoya       Float?
-  bokoyaJoriman             Float?
-  halDabi                   Float?
-  totalDabi                 Float?
-  totalBokoya               Float?
+  net_jomir_poriman         String?
+  moreThenThreeYearBokoya   String?
+  lastThreeYearBokoya       String?
+  bokoyaJoriman             String?
+  halDabi                   String?
+  totalDabi                 String?
+  totalBokoya               String?
   netTotal                  String?
   last_tax_payment_year     String?
   chalan_no                 String?
@@ -40,12 +40,12 @@ model LandTaxReceipt {
 
 type Owner {
   owner_name                String?
-  owner_share               Float?
+  owner_share               String?
 }
 
 type LandDetail {
-  land_sl                   Float?
-  dag_no                    Float?
+  land_sl                   String?
+  dag_no                    String?
   jomir_type                String?
-  jomir_poriman             Float?
+  jomir_poriman             String?
 }
