@@ -3,13 +3,13 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   
-  const sevenDaysAgo = new Date();
-  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+  const sixMonthsAgo = new Date();
+  sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
 
   await prisma.landTaxReceipt.deleteMany({
     where: {
       createdAt: {
-        lt: sevenDaysAgo,
+        lt: sixMonthsAgo,
       },
     },
   });
@@ -19,3 +19,4 @@ export async function GET() {
     status: 200,
   });
 }
+

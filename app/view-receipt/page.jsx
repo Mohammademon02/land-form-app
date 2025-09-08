@@ -63,37 +63,37 @@ function ViewReceiptContent() {
       .join('');
   };
 
-  // useEffect(() => {
-  //   // Disable right-click
-  //   const handleContextMenu = (e) => e.preventDefault();
-  //   document.addEventListener("contextmenu", handleContextMenu);
+  useEffect(() => {
+    // Disable right-click
+    const handleContextMenu = (e) => e.preventDefault();
+    document.addEventListener("contextmenu", handleContextMenu);
 
-  //   // Disable pinch zoom
-  //   const blockZoom = (e) => {
-  //     if (e.touches?.length > 1) e.preventDefault();
-  //   };
-  //   const blockGesture = (e) => e.preventDefault();
+    // Disable pinch zoom
+    const blockZoom = (e) => {
+      if (e.touches?.length > 1) e.preventDefault();
+    };
+    const blockGesture = (e) => e.preventDefault();
 
-  //   document.addEventListener("touchstart", blockZoom, { passive: false });
-  //   document.addEventListener("gesturestart", blockGesture, { passive: false });
+    document.addEventListener("touchstart", blockZoom, { passive: false });
+    document.addEventListener("gesturestart", blockGesture, { passive: false });
 
-  //   // Disable Ctrl + / - / 0 zoom shortcuts
-  //   const handleKeyDown = (e) => {
-  //     if (
-  //       (e.ctrlKey && (e.key === "+" || e.key === "-" || e.key === "0"))
-  //     ) {
-  //       e.preventDefault();
-  //     }
-  //   };
-  //   document.addEventListener("keydown", handleKeyDown);
+    // Disable Ctrl + / - / 0 zoom shortcuts
+    const handleKeyDown = (e) => {
+      if (
+        (e.ctrlKey && (e.key === "+" || e.key === "-" || e.key === "0"))
+      ) {
+        e.preventDefault();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
 
-  //   return () => {
-  //     document.removeEventListener("contextmenu", handleContextMenu);
-  //     document.removeEventListener("touchstart", blockZoom);
-  //     document.removeEventListener("gesturestart", blockGesture);
-  //     document.removeEventListener("keydown", handleKeyDown);
-  //   };
-  // }, []);
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+      document.removeEventListener("touchstart", blockZoom);
+      document.removeEventListener("gesturestart", blockGesture);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   if (loading) {
     return (
@@ -137,106 +137,107 @@ function ViewReceiptContent() {
                 </div>
                 <div className=" px-5 w-[815px] mx-auto ">
                   {/* ==========Address part start========= */}
-                  <div className="printContent__wrapper w-[7.9in] h-[11in] bg-white mt-5 mb-[30px] border border-dotted border-r-solid border-[#333333] p-2.5 rounded-[10px] text-[#333333]">
-                    <div className="grid grid-cols-2 text-sm leading-[15px]">
-                      <div>
-                        <span className="block text-left font-14-17 font-b">
-                          বাংলাদেশ ফরম নং {convertToBengali(receipt.form_no)}
-                        </span>
-                        <span className="block text-left font-14-17">
-                          {" "}
-                          (সংশোধিত){" "}
-                        </span>
-                      </div>
-                      <div>
-                        <span className="block text-right font-14-17">
-                          (পরিশিষ্ট: {convertToBengali(receipt.porishisht_no)})
-                        </span>
-                        <span className="block text-right font-boishakhi font-13-15">
-                          ক্রমিক নং {`${receipt.serial_number}`}
-                        </span>
-                      </div>
-                    </div>
-
+                  <div className="printContent__wrapper w-[7.9in] h-[11in] bg-white mt-5 mb-[30px] border border-dotted border-r-solid border-[#333333] p-2.5 rounded-[10px] text-[#333333] relative">
                     <div>
-                      <div className="font-14-17 text-center">
-                        ভূমি উন্নয়ন কর পরিশোধ রসিদ
+                      <div className="grid grid-cols-2 text-sm leading-[15px]">
+                        <div>
+                          <span className="block text-left font-14-17 font-b">
+                            বাংলাদেশ ফরম নং {convertToBengali(receipt.form_no)}
+                          </span>
+                          <span className="block text-left font-14-17">
+                            {" "}
+                            (সংশোধিত){" "}
+                          </span>
+                        </div>
+                        <div>
+                          <span className="block text-right font-14-17">
+                            (পরিশিষ্ট: {convertToBengali(receipt.porishisht_no)})
+                          </span>
+                          <span className="block text-right font-boishakhi font-13-15">
+                            ক্রমিক নং {`${receipt.serial_number}`}
+                          </span>
+                        </div>
                       </div>
-                      <div className="font-14-17 text-center">
-                        (অনুচ্ছেদ ৩৯২ দ্রষ্টব্য)
+
+                      <div>
+                        <div className="font-14-17 text-center">
+                          ভূমি উন্নয়ন কর পরিশোধ রসিদ
+                        </div>
+                        <div className="font-14-17 text-center">
+                          (অনুচ্ছেদ ৩৯২ দ্রষ্টব্য)
+                        </div>
                       </div>
-                    </div>
-                    <div className="mb-5"></div>
+                      <div className="mb-5"></div>
 
-                    <table className="w-full">
-                      <tbody>
-                        <tr>
-                          <td className="w-[320px] font-14-17">
-                            সিটি কর্পোরেশন/ পৌর/ ইউনিয়ন ভূমি অফিসের নাম:
-                          </td>
-                          <td className="dotted_bottom font-14-17">
-                            {receipt?.office_name}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                      <table className="w-full">
+                        <tbody>
+                          <tr>
+                            <td className="w-[320px] font-14-17">
+                              সিটি কর্পোরেশন/ পৌর/ ইউনিয়ন ভূমি অফিসের নাম:
+                            </td>
+                            <td className="dotted_bottom font-14-17">
+                              {receipt?.office_name}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
 
-                    <table className="mt-[5px] w-full">
-                      <tbody>
-                        <tr>
-                          <td className="w-[170px] font-14-17">
-                            মৌজার নাম ও জে. এল. নং:
-                          </td>
-                          <td className="dotted_bottom pl-[5px] pr-2.5 input_bangla font-13-15 font-boishakhi">
-                            {receipt?.mouzaJL_no}
-                          </td>
-                          <td className="w-[105px] font-14-17">উপজেলা/থানা:</td>
-                          <td className="dotted_bottom pl-[5px] pr-2.5 font-14-17">
-                            {receipt?.upazila_thana}
-                          </td>
-                          <td className="w-[40px] font-14-17">জেলা:</td>
-                          <td className="dotted_bottom pl-[5px] pr-2.5 font-14-17">
-                            {receipt?.district_name}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                      <table className="mt-[5px] w-full">
+                        <tbody>
+                          <tr>
+                            <td className="w-[170px] font-14-17">
+                              মৌজার নাম ও জে. এল. নং:
+                            </td>
+                            <td className="dotted_bottom pl-[5px] pr-2.5 input_bangla font-13-15 font-boishakhi">
+                              {receipt?.mouzaJL_no}
+                            </td>
+                            <td className="w-[105px] font-14-17">উপজেলা/থানা:</td>
+                            <td className="dotted_bottom pl-[5px] pr-2.5 font-14-17">
+                              {receipt?.upazila_thana}
+                            </td>
+                            <td className="w-[40px] font-14-17">জেলা:</td>
+                            <td className="dotted_bottom pl-[5px] pr-2.5 font-14-17">
+                              {receipt?.district_name}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
 
-                    <table className="w-full mt-[5px]">
-                      <tbody>
-                        <tr>
-                          <td className="w-[225px] font-14-17">
-                            ২ নং রেজিস্টার অনুযায়ী হোল্ডিং নম্বর:
-                          </td>
-                          <td className="dotted_bottom numeric_bangla pl-2.5 font-11-13 font-boishakhi">
-                            {receipt?.holding_no}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                      <table className="w-full mt-[5px]">
+                        <tbody>
+                          <tr>
+                            <td className="w-[225px] font-14-17">
+                              ২ নং রেজিস্টার অনুযায়ী হোল্ডিং নম্বর:
+                            </td>
+                            <td className="dotted_bottom numeric_bangla pl-2.5 font-11-13 font-boishakhi">
+                              {receipt?.holding_no}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
 
-                    <table className="w-full mt-[5px]">
-                      <tbody>
-                        <tr>
-                          <td className="w-[75px] font-14-17">খতিয়ান নং:</td>
-                          <td className="dotted_bottom numeric_bangla pl-2.5 font-11-13 font-boishakhi">
-                            {receipt?.khatian_no}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div className="h-2.5"></div>
+                      <table className="w-full mt-[5px]">
+                        <tbody>
+                          <tr>
+                            <td className="w-[75px] font-14-17">খতিয়ান নং:</td>
+                            <td className="dotted_bottom numeric_bangla pl-2.5 font-11-13 font-boishakhi">
+                              {receipt?.khatian_no}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div className="h-2.5"></div>
 
-                    {/* ==========Address part End========= */}
+                      {/* ==========Address part End========= */}
 
-                    {/* ==========মালিকের বিবরণ Start ========= */}
-                    <div>
-                      <p className="font-bold text-xs leading-3.5 text-center m-0 p-0">
-                        <u>মালিকের বিবরণ</u>
-                      </p>
-                    </div>
+                      {/* ==========মালিকের বিবরণ Start ========= */}
+                      <div>
+                        <p className="font-bold text-xs leading-3.5 text-center m-0 p-0">
+                          <u>মালিকের বিবরণ</u>
+                        </p>
+                      </div>
 
-                    <div className="w-full flex flex-wrap gap-x-[14px] mx-[2px]">
+                      {/* <div className="w-full flex flex-wrap gap-x-[14px] mx-[2px]">
                       {receipt?.owners?.map((owner, i) => {
                         return (
                           <table
@@ -261,6 +262,7 @@ function ViewReceiptContent() {
                                 </th>
                               </tr>
                             </thead>
+
                             <tbody className="h-[21px]">
                               <tr>
                                 <td className="b1 input_bangla font-10-12 text-center">
@@ -277,22 +279,89 @@ function ViewReceiptContent() {
                           </table>
                         );
                       })}
-                    </div>
+                    </div> */}
 
-                    {/* ==========মালিকের বিবরণ End ========= */}
+                      <div className="w-full flex flex-wrap gap-x-[14px] mx-[2px]">
+                        {receipt?.owners?.length === 1 ? (
+                          // Single owner - full width table
+                          <table className="border border-dotted border-black my-2.5 text-[11px] w-[100%]">
+                            <thead>
+                              <tr>
+                                <th className="w-[10%] text-center b1 font-11-13">ক্রমঃ</th>
+                                <th className="w-[60%] text-center b1 font-11-13">মালিকের নাম</th>
+                                <th className="w-[25%] text-center b1 font-11-13">মালিকের অংশ</th>
+                              </tr>
+                            </thead>
+                            <tbody className="h-[21px]">
+                              <tr>
+                                <td className="b1 input_bangla font-10-12 text-center">1</td>
+                                <td className="b1 input_bangla font-10-12">{receipt.owners[0]?.owner_name}</td>
+                                <td className="b1 input_bangla font-10-12 text-center">{receipt.owners[0]?.owner_share}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        ) : (
+                          // Multiple owners - split into two columns
+                          <>
+                            {/* First Half - Left Column */}
+                            <table className="border border-dotted border-black my-2.5 text-[11px] w-[49%]">
+                              <thead>
+                                <tr>
+                                  <th className="w-[10%] text-center b1 font-11-13">ক্রমঃ</th>
+                                  <th className="w-[60%] text-center b1 font-11-13">মালিকের নাম</th>
+                                  <th className="w-[25%] text-center b1 font-11-13">মালিকের অংশ</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {receipt.owners.slice(0, Math.ceil(receipt.owners.length / 2)).map((owner, i) => (
+                                  <tr key={i} className="h-[21px]">
+                                    <td className="b1 input_bangla font-10-12 text-center">{i + 1}</td>
+                                    <td className="b1 input_bangla font-10-12">{owner?.owner_name}</td>
+                                    <td className="b1 input_bangla font-10-12 text-center">{owner?.owner_share}</td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
 
-                    <div className="w-full">
-                      {/* ==========জমির বিবরণ Start============ */}
-
-                      <div>
-                        <p className="font-bold text-xs leading-3.5 text-center m-0 p-0">
-                          <u>জমির বিবরণ</u>
-                        </p>
+                            {/* Second Half - Right Column */}
+                            <table className="border border-dotted border-black my-2.5 text-[11px] w-[49%]">
+                              <thead>
+                                <tr>
+                                  <th className="w-[10%] text-center b1 font-11-13">ক্রমঃ</th>
+                                  <th className="w-[60%] text-center b1 font-11-13">মালিকের নাম</th>
+                                  <th className="w-[25%] text-center b1 font-11-13">মালিকের অংশ</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {receipt.owners.slice(Math.ceil(receipt.owners.length / 2)).map((owner, i) => (
+                                  <tr key={i} className="h-[21px]">
+                                    <td className="b1 input_bangla font-10-12 text-center">
+                                      {Math.ceil(receipt.owners.length / 2) + i + 1}
+                                    </td>
+                                    <td className="b1 input_bangla font-10-12">{owner?.owner_name}</td>
+                                    <td className="b1 input_bangla font-10-12 text-center">{owner?.owner_share}</td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </>
+                        )}
                       </div>
 
-                      {receipt?.landDetails?.length > 0 && (
-                        <>
-                          <div className="w-full flex flex-wrap gap-x-[14px] mx-[2px]">
+                      {/* ==========মালিকের বিবরণ End ========= */}
+
+                      <div className="w-full">
+                        {/* ==========জমির বিবরণ Start============ */}
+
+                        <div>
+                          <p className="font-bold text-xs leading-3.5 text-center m-0 p-0">
+                            <u>জমির বিবরণ</u>
+                          </p>
+                        </div>
+
+                        {receipt?.landDetails?.length > 0 && (
+                          <>
+                            {/* <div className="w-full flex flex-wrap gap-x-[14px] mx-[2px]">
                             {receipt?.landDetails?.map((land, index) => {
                               return (
                                 <table
@@ -333,141 +402,218 @@ function ViewReceiptContent() {
                                 </table>
                               );
                             })}
-                          </div>
+                          </div> */}
 
-                          <table className="w-full border border-dotted border-black mx-[2px] my-2.5 text-[12px]">
-                            <tbody>
-                              <tr>
-                                <td className="w-[50%] b1 text-center">
-                                  সর্বমোট জমি (শতাংশ)
-                                </td>
-                                <td className="w-[50%] b1 input_bangla">
-                                  {receipt?.net_jomir_poriman}
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </>
-                      )}
+                            <div className="w-full flex flex-wrap gap-x-[14px] mx-[2px]">
+                              {receipt?.landDetails?.length === 1 ? (
+                                // Single land detail - full width table
+                                <table className="border border-dotted border-black my-2.5 text-[11px] w-[100%]">
+                                  <thead>
+                                    <tr>
+                                      <th className="b1 text-left">ক্রমঃ</th>
+                                      <th className="b1 text-left">দাগ নং</th>
+                                      <th className="b1 text-left">জমির শ্রেণি</th>
+                                      <th className="b1 text-left">জমির পরিমাণ (শতাংশ)</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody className="h-[21px]">
+                                    <tr>
+                                      <td className="b1 input_bangla text-center">{receipt.landDetails[0]?.land_sl}</td>
+                                      <td className="b1 input_bangla">{receipt.landDetails[0]?.dag_no}</td>
+                                      <td className="b1">{receipt.landDetails[0]?.jomir_type}</td>
+                                      <td className="b1 input_bangla">{receipt.landDetails[0]?.jomir_poriman}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              ) : (
+                                // Multiple land details - split into two columns
+                                <>
+                                  {/* First Half - Left Column */}
+                                  <table className="border border-dotted border-black my-2.5 text-[11px] w-[49%]">
+                                    <thead>
+                                      <tr>
+                                        <th className="b1 text-left">ক্রমঃ</th>
+                                        <th className="b1 text-left">দাগ নং</th>
+                                        <th className="b1 text-left">জমির শ্রেণি</th>
+                                        <th className="b1 text-left">জমির পরিমাণ (শতাংশ)</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {receipt.landDetails.slice(0, Math.ceil(receipt.landDetails.length / 2)).map((land, index) => (
+                                        <tr key={index} className="h-[21px]">
+                                          <td className="b1 input_bangla text-center">{land?.land_sl}</td>
+                                          <td className="b1 input_bangla">{land?.dag_no}</td>
+                                          <td className="b1">{land?.jomir_type}</td>
+                                          <td className="b1 input_bangla">{land?.jomir_poriman}</td>
+                                        </tr>
+                                      ))}
+                                    </tbody>
+                                  </table>
 
-                      <div className="h-2.5"></div>
-                      {/* ==========জমির বিবরণ End============ */}
+                                  {/* Second Half - Right Column */}
+                                  <table className="border border-dotted border-black my-2.5 text-[11px] w-[49%]">
+                                    <thead>
+                                      <tr>
+                                        <th className="b1 text-left">ক্রমঃ</th>
+                                        <th className="b1 text-left">দাগ নং</th>
+                                        <th className="b1 text-left">জমির শ্রেণি</th>
+                                        <th className="b1 text-left">জমির পরিমাণ (শতাংশ)</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {receipt.landDetails.slice(Math.ceil(receipt.landDetails.length / 2)).map((land, index) => (
+                                        <tr key={index} className="h-[21px]">
+                                          <td className="b1 input_bangla text-center">{land?.land_sl}</td>
+                                          <td className="b1 input_bangla">{land?.dag_no}</td>
+                                          <td className="b1">{land?.jomir_type}</td>
+                                          <td className="b1 input_bangla">{land?.jomir_poriman}</td>
+                                        </tr>
+                                      ))}
+                                    </tbody>
+                                  </table>
+                                </>
+                              )}
+                            </div>
 
-                      {/* ===========আদায়ের বিবরণ Start=========== */}
-                      <table className="w-full table table-striped table-bordered table-hover mx-[2px] my-2.5">
-                        <tbody>
-                          <tr className="bg-[#F9F9F9] hover:bg-[#F5F5F5]">
-                            <th
-                              className="text-center p-2 border-b border-[#ddd] text-sm leading-5"
-                              colSpan="8"
-                            >
-                              আদায়ের বিবরণ
-                            </th>
-                          </tr>
+                            <table className="w-full border border-dotted border-black mx-[2px] my-2.5 text-[12px]">
+                              <tbody>
+                                <tr>
+                                  <td className="w-[50%] b1 text-center">
+                                    সর্বমোট জমি (শতাংশ)
+                                  </td>
+                                  <td className="w-[50%] b1 input_bangla">
+                                    {receipt?.net_jomir_poriman}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </>
+                        )}
 
-                          <tr className="hover:bg-[#F5F5F5]">
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
-                              তিন বৎসরের ঊর্ধ্বের বকেয়া
-                            </td>
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
-                              গত তিন বৎসরের বকেয়া
-                            </td>
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
-                              বকেয়ার জরিমানা ও ক্ষতিপূরণ
-                            </td>
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
-                              হাল দাবি
-                            </td>
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
-                              মোট দাবি
-                            </td>
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
-                              মোট আদায়
-                            </td>
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
-                              মোট বকেয়া
-                            </td>
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
-                              মন্তব্য
-                            </td>
-                          </tr>
+                        <div className="h-2.5"></div>
+                        {/* ==========জমির বিবরণ End============ */}
 
-                          <tr className="bg-[#F9F9F9] hover:bg-[#F5F5F5]">
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
-                              {convertToBengali(receipt?.moreThenThreeYearBokoya)}
-                            </td>
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
-                              {convertToBengali(receipt?.lastThreeYearBokoya)}
-                            </td>
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
-                              {convertToBengali(receipt?.bokoyaJoriman)}
-                            </td>
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
-                              {convertToBengali(receipt?.halDabi)}
-                            </td>
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
-                              {convertToBengali(receipt?.totalDabi)}
-                            </td>
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
-                              {convertToBengali(receipt?.totalBokoya)}
-                            </td>
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
-                              ০
-                            </td>
-                            <td className="text-center text-sm leading-5 p-2 border border-[#ddd]"></td>
-                          </tr>
-                        </tbody>
-                      </table>
+                        {/* ===========আদায়ের বিবরণ Start=========== */}
+                        <table className="w-full table table-striped table-bordered table-hover mx-[2px] my-2.5">
+                          <tbody>
+                            <tr className="bg-[#F9F9F9] hover:bg-[#F5F5F5]">
+                              <th
+                                className="text-center p-2 border-b border-[#ddd] text-sm leading-5"
+                                colSpan="8"
+                              >
+                                আদায়ের বিবরণ
+                              </th>
+                            </tr>
 
-                      <div className="w-full  mx-[2px] my-2.5">
-                        <p className="dotted_bottom font-14-17">
-                          সর্বমোট (কথায়): {receipt?.netTotal} ।
-                        </p>
-                      </div>
-                      {/* ===========আদায়ের বিবরণ End=========== */}
+                            <tr className="hover:bg-[#F5F5F5]">
+                              <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
+                                তিন বৎসরের ঊর্ধ্বের বকেয়া
+                              </td>
+                              <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
+                                গত তিন বৎসরের বকেয়া
+                              </td>
+                              <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
+                                বকেয়ার জরিমানা ও ক্ষতিপূরণ
+                              </td>
+                              <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
+                                হাল দাবি
+                              </td>
+                              <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
+                                মোট দাবি
+                              </td>
+                              <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
+                                মোট আদায়
+                              </td>
+                              <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
+                                মোট বকেয়া
+                              </td>
+                              <td className="text-center text-sm leading-5 p-2 border border-[#ddd]">
+                                মন্তব্য
+                              </td>
+                            </tr>
 
-                      {/* ===========Qr Code Start=========== */}
-                      <div>
-                        <div className="w-[350px] float-left">
-                          <p className="m-0 font-14-17">
-                            নোট: সর্বশেষ কর পরিশোধের সাল - {receipt?.last_tax_payment_year} (অর্থবছর)
+                            <tr className="bg-[#F9F9F9] hover:bg-[#F5F5F5]">
+                              <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
+                                {convertToBengali(receipt?.moreThenThreeYearBokoya)}
+                              </td>
+                              <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
+                                {convertToBengali(receipt?.lastThreeYearBokoya)}
+                              </td>
+                              <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
+                                {convertToBengali(receipt?.bokoyaJoriman)}
+                              </td>
+                              <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
+                                {convertToBengali(receipt?.halDabi)}
+                              </td>
+                              <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
+                                {convertToBengali(receipt?.totalDabi)}
+                              </td>
+                              <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
+                                {convertToBengali(receipt?.totalBokoya)}
+                              </td>
+                              <td className="text-center text-sm leading-5 p-2 border border-[#ddd] font-kalpurush">
+                                ০
+                              </td>
+                              <td className="text-center text-sm leading-5 p-2 border border-[#ddd]"></td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <div className="w-full  mx-[2px] my-2.5">
+                          <p className="dotted_bottom font-14-17">
+                            সর্বমোট (কথায়): {receipt?.netTotal} ।
                           </p>
-                          <p className="input_bangla font-13-15 mb-2">
-                            {" "}
-                            চালান নং : {receipt?.chalan_no}
-                          </p>
+                        </div>
+                        {/* ===========আদায়ের বিবরণ End=========== */}
 
-                          <p> তারিখ : </p>
-
-                          <div className="mt-[-28px] ml-2.5 font-14-17">
-                            <p className="w-[115px] p-0 m-0 ml-[41px] mb-[2px] font-14-17">
-                              {receipt?.bangla_date}
+                        {/* ===========Qr Code Start=========== */}
+                        <div>
+                          <div className="w-[350px] float-left">
+                            <p className="m-0 font-14-17">
+                              নোট: সর্বশেষ কর পরিশোধের সাল - {receipt?.last_tax_payment_year} (অর্থবছর)
                             </p>
-                            <span className="border-t ml-[41px] font-14-17">
-                              {receipt?.eglish_date}
-                            </span>
+                            <p className="input_bangla font-13-15 mb-2">
+                              {" "}
+                              চালান নং : {receipt?.chalan_no}
+                            </p>
+
+                            <p> তারিখ : </p>
+
+                            <div className="mt-[-28px] ml-2.5 font-14-17">
+                              <p className="w-[115px] p-0 m-0 ml-[41px] mb-[2px] font-14-17">
+                                {receipt?.bangla_date}
+                              </p>
+                              <span className="border-t ml-[41px] font-14-17">
+                                {receipt?.eglish_date}
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="w-[90px] float-left flex justify-center items-center">
+                            {/* ✅ QR Code render */}
+                            <QRCodeCanvas
+                              value={qrUrl}
+                              size={74}
+                              includeMargin={true}
+                              bgColor={"#ffffff"}
+                              fgColor={"#000000"}
+                            />
+                          </div>
+
+                          <div className="w-[265px] float-right text-right text-xs">
+                            <p className="text-center p-[5px]">
+                              এই দাখিলা ইলেক্ট্রনিকভাবে তৈরি করা হয়েছে, <br />{" "}
+                              কোন স্বাক্ষর প্রয়োজন নেই।
+                            </p>
                           </div>
                         </div>
-
-                        <div className="w-[90px] float-left flex justify-center items-center">
-                          {/* ✅ QR Code render */}
-                          <QRCodeCanvas
-                            value={qrUrl}
-                            size={74}
-                            includeMargin={true}
-                            bgColor={"#ffffff"}
-                            fgColor={"#000000"}
-                          />
-                        </div>
-
-                        <div className="w-[265px] float-right text-right text-xs">
-                          <p className="text-center p-[5px]">
-                            এই দাখিলা ইলেক্ট্রনিকভাবে তৈরি করা হয়েছে, <br />{" "}
-                            কোন স্বাক্ষর প্রয়োজন নেই।
-                          </p>
-                        </div>
+                        {/* ===========Qr Code End=========== */}
                       </div>
-                      {/* ===========Qr Code End=========== */}
+                    </div>
+
+                    <div className="text-right w-full absolute bottom-0 right-0 px-[15px]">
+                      <div className="w-full border-t border-dotted border-[#808080] mt-[15px]"></div>
+                      <div className="text-sm leading-[17px]">1/1</div>
                     </div>
                   </div>
                 </div>

@@ -5,8 +5,8 @@ export async function POST(request) {
     const { username, password } = await request.json();
 
     // স্ট্যাটিক ব্যবহারকারীর নাম এবং পাসওয়ার্ড
-    const staticUsername = 'scam1992';
-    const staticPassword = 'scam1992';
+    const staticUsername = 'Ononto1676';
+    const staticPassword = 'brspkon1676';
 
     // ব্যবহারকারীর প্রমাণপত্র যাচাই করা
     if (username === staticUsername && password === staticPassword) {
