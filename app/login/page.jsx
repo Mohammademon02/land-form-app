@@ -1,6 +1,5 @@
 'use client';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // SVG Icons as components
 const UserIcon = ({ className = "w-6 h-6" }) => (
@@ -34,7 +33,16 @@ export default function LoginPage() {
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-    const router = useRouter();
+
+    // Replaced Next.js useRouter and useSearchParams with a useEffect hook
+    const [redirectUrl, setRedirectUrl] = useState('');
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const params = new URLSearchParams(window.location.search);
+            setRedirectUrl(params.get('redirect') || '');
+        }
+    }, []);
 
     const validateForm = () => {
         if (!username.trim()) {
@@ -70,7 +78,12 @@ export default function LoginPage() {
             });
 
             if (response.ok) {
-                router.push('/form-view');
+                // Use window.location.href for redirection
+                if (redirectUrl) {
+                    window.location.href = redirectUrl;
+                } else {
+                    window.location.href = '/form-view';
+                }
             } else {
                 const data = await response.json();
                 setError(data.error || 'লগইন ব্যর্থ হয়েছে।');
