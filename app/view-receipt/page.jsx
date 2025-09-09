@@ -281,7 +281,7 @@ function ViewReceiptContent() {
                       })}
                     </div> */}
 
-                      <div className="w-full flex flex-wrap gap-x-[14px] mx-[2px]">
+                      <div className="w-full flex flex-wrap items-baseline gap-x-[14px] mx-[2px]">
                         {receipt?.owners?.length === 1 ? (
                           // Single owner - full width table
                           <table className="border border-dotted border-black my-2.5 text-[11px] w-[100%]">
@@ -404,7 +404,7 @@ function ViewReceiptContent() {
                             })}
                           </div> */}
 
-                            <div className="w-full flex flex-wrap gap-x-[14px] mx-[2px]">
+                            <div className="w-full flex flex-wrap items-baseline gap-x-[14px] mx-[2px]">
                               {receipt?.landDetails?.length === 1 ? (
                                 // Single land detail - full width table
                                 <table className="border border-dotted border-black my-2.5 text-[11px] w-[100%]">
